@@ -24,25 +24,20 @@ public class RentAdSearchTest extends TestBase {
         actions = new SeleniumActions(driver, 10);
     }
     
-    @Test(description = "Verify page loads and basic elements are present")
-    public void testPageLoads() {
-        // Example test demonstrating basic functionality
-        // This would be replaced with your actual test logic
+    @Test(description = "Verify xe.gr homepage loads and basic elements are present")
+    public void testXeGrHomepageLoads() {
+        // Test that xe.gr homepage loads successfully
+        // The page should already be loaded from TestBase
         
-        // Example: Find and click a button
-        // actions.findAndClick("//button[@id='searchButton']");
+        // Example: Verify main navigation elements exist
+        // actions.find("//a[contains(text(), 'Ακίνητα')]", true);
+        // actions.find("//a[contains(text(), 'Εργασία')]", true);
+        // actions.find("//a[contains(text(), 'Αυτοκίνητα')]", true);
         
-        // Example: Type text into an input field
-        // actions.findAndType("//input[@id='searchInput']", "test search");
+        // Example: Check if search functionality is present
+        // actions.find("//input[@placeholder='Αναζήτηση...']", true);
         
-        // Example: Verify elements exist
-        // actions.find("//div[@class='results']", true);
-        
-        // Example: Assert count of elements
-        // String[] expectedValues = {"Option1", "Option2", "Option3"};
-        // actions.findAndAssertCount("//option", expectedValues);
-        
-        System.out.println("Test executed successfully - Page loaded and ready for testing");
+        System.out.println("xe.gr homepage loaded successfully - ready for testing");
     }
     
     @Test(description = "Example test with element validation")
@@ -57,14 +52,23 @@ public class RentAdSearchTest extends TestBase {
         }
     }
     
-    @Test(description = "Example test with list validation")
-    public void testListValidation() {
-        // Example of validating a list of elements
-        List<String> expectedOptions = Arrays.asList("Option A", "Option B", "Option C");
+    @Test(description = "Example test with URL building and navigation")
+    public void testUrlBuildingAndNavigation() {
+        // Example of building URLs dynamically
+        String propertySearchUrl = buildUrl("properties");
+        String jobSearchUrl = buildUrl("jobs");
         
-        // This would validate that exactly these options exist and count matches
-        // actions.findAndAssertCount("//select[@id='dropdown']//option", expectedOptions);
+        System.out.println("Property search URL: " + propertySearchUrl);
+        System.out.println("Job search URL: " + jobSearchUrl);
         
-        System.out.println("List validation test completed");
+        // Example: Navigate to a specific section
+        // navigateToPath("properties");  // Would navigate to https://www.xe.gr/properties
+        // actions.find("//h1[contains(text(), 'Ακίνητα')]", true);
+        
+        // Example: Navigate to another section
+        // navigateToPath("jobs");  // Would navigate to https://www.xe.gr/jobs
+        // actions.find("//h1[contains(text(), 'Εργασία')]", true);
+        
+        System.out.println("URL building and navigation test completed");
     }
 }

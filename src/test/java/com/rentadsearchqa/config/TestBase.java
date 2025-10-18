@@ -20,7 +20,7 @@ import java.time.Duration;
 public class TestBase {
     
     protected WebDriver driver;
-    protected String htmlFilePath;
+    protected String baseUrl;
     
     @BeforeSuite
     public void setupSuite() {
@@ -31,8 +31,8 @@ public class TestBase {
     @BeforeMethod
     public void setupBrowser() {
         setupChromeDriver();
-        setupHtmlFilePath();
-        navigateToHtmlFile();
+        setupBaseUrl();
+        navigateToBaseUrl();
         setupDriverContext();
     }
     
@@ -64,20 +64,19 @@ public class TestBase {
     }
     
     /**
-     * Setup HTML file path for testing
-     * This replaces the html_file_path fixture from conftest.py
+     * Setup base URL for testing
+     * This sets the base URL for xe.gr website
      */
-    private void setupHtmlFilePath() {
-        String username = System.getProperty("user.name");
-        htmlFilePath = String.format("file:///C:/Users/%s/Downloads/QA%%20Programming%%20Exercise.html", username);
+    private void setupBaseUrl() {
+        baseUrl = "https://www.xe.gr/";
     }
     
     /**
-     * Navigate to HTML file and maximize window
+     * Navigate to base URL and maximize window
      * This replaces the setup_browser_test fixture from conftest.py
      */
-    private void navigateToHtmlFile() {
-        driver.get(htmlFilePath);
+    private void navigateToBaseUrl() {
+        driver.get(baseUrl);
         driver.manage().window().maximize();
     }
     
@@ -87,6 +86,29 @@ public class TestBase {
      */
     private void setupDriverContext() {
         DriverContext.getInstance().setDriver(driver);
+    }
+    
+    /**
+     * Build URL by appending path to base URL
+     * 
+     * @param path The path to append to base URL
+     * @return Complete URL
+     */
+    public String buildUrl(String path) {
+        if (path.startsWith("/")) {
+            return baseUrl + path.substring(1);
+        }
+        return baseUrl + path;
+    }
+    
+    /**
+     * Navigate to a specific URL path
+     * 
+     * @param path The path to navigate to
+     */
+    public void navigateToPath(String path) {
+        String fullUrl = buildUrl(path);
+        driver.get(fullUrl);
     }
     
     @AfterMethod

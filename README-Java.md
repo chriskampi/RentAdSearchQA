@@ -122,11 +122,19 @@ All Chrome options from the Python version are preserved:
 - `--allow-running-insecure-content`
 - `--disable-extensions`
 
-### HTML File Path
-Automatically constructs the HTML file path using:
+### Base URL Configuration
+The framework is configured to test the live xe.gr website:
 ```java
-String username = System.getProperty("user.name");
-String htmlFilePath = String.format("file:///C:/Users/%s/Downloads/QA%%20Programming%%20Exercise.html", username);
+String baseUrl = "https://www.xe.gr/";
+```
+
+### URL Building
+You can build URLs dynamically for different sections:
+```java
+// Navigate to specific paths
+navigateToPath("properties");  // → https://www.xe.gr/properties
+navigateToPath("jobs");        // → https://www.xe.gr/jobs
+buildUrl("cars");              // → https://www.xe.gr/cars
 ```
 
 ## Benefits of Java Version
@@ -152,7 +160,7 @@ String htmlFilePath = String.format("file:///C:/Users/%s/Downloads/QA%%20Program
 ### Common Issues
 
 1. **WebDriver not found**: Ensure Chrome browser is installed
-2. **HTML file not found**: Check if the HTML file exists in Downloads folder
+2. **Website not accessible**: Check your internet connection and xe.gr availability
 3. **Compilation errors**: Ensure Java 11+ is installed and configured
 4. **Maven issues**: Ensure Maven is properly installed and configured
 

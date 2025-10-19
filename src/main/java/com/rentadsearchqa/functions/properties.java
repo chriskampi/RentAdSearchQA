@@ -32,7 +32,7 @@ public class properties extends SeleniumActions {
         // For each option, check if it's already selected, if not, click it
         for (WebElement option : dropdownOptions) {
             String optionText = option.getText();
-            int count = searchPage.countDropdownOptionButtons(optionText);
+            int count = searchPage.countSelectedResultButtons(optionText);
             
             if (count == 0) {
                 searchPage.clickDropdownOption(optionText);

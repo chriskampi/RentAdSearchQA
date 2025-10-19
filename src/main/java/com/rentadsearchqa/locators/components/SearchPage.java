@@ -41,6 +41,10 @@ public class SearchPage extends SeleniumActions {
     private String constructDropdownOptionButton(String text) {
         return BUTTON_DROPDOWN_OPTION + "[.='" + text + "']";
     }
+
+    private String constructSelectedResultButton(String text) {
+        return BUTTON_SELECTED_RESULT + "[.='" + text + "']";
+    }
     
     // ===== CLICK FUNCTION =====
     public void clickSearchButton() {
@@ -62,7 +66,10 @@ public class SearchPage extends SeleniumActions {
     public int countDropdownOptionButtons(String text) {
         return countElements(constructDropdownOptionButton(text));
     }
-    
+
+    public int countSelectedResultButtons(String text) {
+        return countElements(constructSelectedResultButton(text));
+    }
     
     public List<WebElement> findDropdownOptions() {
         return findElements(BUTTON_DROPDOWN_OPTION);

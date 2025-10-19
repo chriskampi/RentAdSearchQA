@@ -94,35 +94,75 @@ src/
 - Contact buttons reveal phone info
 - Image count doesn't exceed 30 per property
 
-## Running Tests
+## Getting Started
 
 ### Prerequisites
-- Java 11 or higher
-- Maven 3.6 or higher
-- Chrome browser installed
-- Internet connection (tests live xe.gr website)
+- **Java 11 or higher** - Download from [Oracle](https://www.oracle.com/java/technologies/downloads/) or [OpenJDK](https://openjdk.org/)
+- **Maven 3.6 or higher** - Download from [Apache Maven](https://maven.apache.org/download.cgi)
+- **Chrome browser** - Latest version installed
+- **Internet connection** - Tests run against live xe.gr website
+- **Git** - For cloning the repository
 
-### Commands
+### Quick Setup
 
+#### 1. Clone the Repository
 ```bash
-# Compile the project
-mvn compile
+git clone <your-repository-url>
+cd RentAdSearchQA
+```
 
-# Run all tests
-mvn test
+#### 2. Verify Prerequisites
+```bash
+# Check Java version
+java -version
 
-# Run specific test class
+# Check Maven version  
+mvn -version
+
+# Check Chrome installation
+chrome --version
+```
+
+#### 3. Compile the Project
+```bash
+mvn clean compile
+```
+
+#### 4. Run the Smoke Test
+```bash
 mvn test -Dtest=RentAdSearchTest
+```
 
-# Run with Windows batch script
-run-tests.bat
-
-# Generate Allure report
+#### 5. Generate Allure Report
+```bash
 mvn allure:serve
 ```
 
-### Test Execution
-The smoke test typically runs in 5-15 minutes and provides detailed step-by-step reporting for each validation.
+### Alternative Execution Methods
+
+#### Windows Users
+```bash
+# Use the provided batch script
+run-tests.bat
+```
+
+#### All Tests
+```bash
+# Run all test suites
+mvn test
+```
+
+#### Specific Test Groups
+```bash
+# Run smoke tests only
+mvn test -Dgroups=smoke
+```
+
+### Test Execution Details
+- **Duration**: 5-15 minutes (depending on results count)
+- **Browser**: Chrome (automatically managed by WebDriverManager)
+- **Reports**: Generated in `allure-results/` directory
+- **Logs**: Console output with step-by-step progress
 
 ## Production Readiness
 
@@ -218,11 +258,24 @@ String baseUrl = "https://www.xe.gr/";
 
 ### Common Issues
 
+#### **Setup Issues**
 1. **WebDriver not found**: Ensure Chrome browser is installed
 2. **Website not accessible**: Check your internet connection and xe.gr availability
 3. **Compilation errors**: Ensure Java 11+ is installed and configured
 4. **Maven issues**: Ensure Maven is properly installed and configured
 5. **Test failures**: Check xe.gr website changes that might affect selectors
+
+#### **Git Repository Issues**
+1. **Clone fails**: Verify repository URL and Git access permissions
+2. **Dependencies not found**: Run `mvn clean install` to download dependencies
+3. **Permission denied**: Ensure you have write permissions in the project directory
+4. **Branch issues**: Make sure you're on the main/master branch
+
+#### **Environment Issues**
+1. **Java not found**: Add Java to your PATH environment variable
+2. **Maven not found**: Add Maven to your PATH environment variable
+3. **Chrome not found**: Install Chrome browser or update PATH
+4. **Port conflicts**: Allure serve uses port 8080 by default
 
 ### Debug Mode
 To run tests in debug mode, uncomment the headless option in `TestBase.java`:
@@ -235,6 +288,32 @@ chromeOptions.addArguments("--headless"); // Uncomment for headless mode
 - **Network issues**: Tests require stable internet connection
 - **Browser updates**: WebDriverManager handles Chrome driver updates automatically
 - **Report generation**: Use `mvn allure:serve` for detailed HTML reports
+- **Clean runs**: Use `mvn clean test` for fresh test execution
+
+## What xe.gr Will Receive
+
+### Repository Contents
+When xe.gr clones this repository, they will get:
+
+#### **Complete Test Automation Framework**
+- ✅ **Ready-to-run** smoke tests for their production website
+- ✅ **Professional architecture** following industry best practices
+- ✅ **Comprehensive documentation** for easy setup and execution
+- ✅ **Allure reporting** with detailed step-by-step execution tracking
+- ✅ **Production-ready configuration** for daily execution
+
+#### **Deliverables Included**
+1. **Source Code** - Complete Java/Selenium/TestNG implementation
+2. **Documentation** - Comprehensive README with setup instructions
+3. **Test Reports** - Sample Allure reports in `allure-results/` directory
+4. **Build Scripts** - Maven configuration and Windows batch script
+5. **Test Configuration** - TestNG suite configuration for different test groups
+
+#### **Ready for Immediate Use**
+- **Clone and run** - No additional setup required beyond prerequisites
+- **Daily execution** - Designed for production smoke testing
+- **CI/CD ready** - Can be integrated into build pipelines
+- **Maintainable** - Clean code structure for easy updates
 
 ## Interview Assessment Ready
 
@@ -245,5 +324,6 @@ This implementation demonstrates:
 - ✅ **Java best practices** (Clean code, proper structure)
 - ✅ **Selenium expertise** (Advanced interactions, validation)
 - ✅ **Business understanding** (xe.gr requirements fully met)
+- ✅ **Git repository ready** (Complete setup instructions and documentation)
 
 **Perfect for your job interview assessment! 🚀**

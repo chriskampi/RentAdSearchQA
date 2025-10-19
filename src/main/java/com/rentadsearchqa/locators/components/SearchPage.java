@@ -64,8 +64,8 @@ public class SearchPage extends SeleniumActions {
     }
     
     
-    public List<WebElement> findDropdownOptions(String text) {
-        return findElements(constructDropdownOptionButton(text));
+    public List<WebElement> findDropdownOptions() {
+        return findElements(BUTTON_DROPDOWN_OPTION);
     }
     
 }

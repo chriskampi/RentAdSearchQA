@@ -27,7 +27,7 @@ public class properties extends SeleniumActions {
         searchPage.typeSearchInput("area", areaName);
         
         // Get all dropdown options
-        List<WebElement> dropdownOptions = searchPage.findDropdownOptions(areaName);
+        List<WebElement> dropdownOptions = searchPage.findDropdownOptions();
         
         // For each option, check if it's already selected, if not, click it
         for (WebElement option : dropdownOptions) {

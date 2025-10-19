@@ -2,9 +2,13 @@ package com.rentadsearchqa.config;
 
 import com.rentadsearchqa.utils.DriverContext;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -33,6 +37,7 @@ public class TestBase {
         setupChromeDriver();
         setupBaseUrl();
         navigateToBaseUrl();
+        handleCookieConsent();
         setupDriverContext();
     }
     
@@ -78,6 +83,21 @@ public class TestBase {
     private void navigateToBaseUrl() {
         driver.get(baseUrl);
         driver.manage().window().maximize();
+    }
+    
+    /**
+     * Handle cookie consent dialog by clicking accept button if it appears
+     */
+    private void handleCookieConsent() {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebElement acceptButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='accept-btn']")));
+            acceptButton.click();
+            System.out.println("Cookie consent accepted automatically");
+        } catch (Exception e) {
+            // Cookie consent dialog didn't appear or couldn't be clicked
+            System.out.println("Cookie consent dialog not found or already handled: " + e.getMessage());
+        }
     }
     
     /**

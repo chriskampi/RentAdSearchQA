@@ -17,15 +17,20 @@ public class RentAdSearchTest extends TestBase {
     
     private SeleniumActions actions;
     
-    @Override
-    protected void setupDriverContext() {
-        super.setupDriverContext();
-        WebDriver driver = DriverContext.getInstance().getDriver();
-        actions = new SeleniumActions(driver, 10);
+    /**
+     * Initialize SeleniumActions - call this at the beginning of each test
+     */
+    private void initializeActions() {
+        if (actions == null) {
+            WebDriver driver = DriverContext.getInstance().getDriver();
+            actions = new SeleniumActions(driver, 10);
+        }
     }
     
     @Test(description = "Verify xe.gr homepage loads and basic elements are present")
     public void testXeGrHomepageLoads() {
+        initializeActions(); // Initialize SeleniumActions
+        
         // Test that xe.gr homepage loads successfully
         // The page should already be loaded from TestBase
         
@@ -42,6 +47,8 @@ public class RentAdSearchTest extends TestBase {
     
     @Test(description = "Example test with element validation")
     public void testElementValidation() {
+        initializeActions(); // Initialize SeleniumActions
+        
         // Example of checking if elements exist without waiting
         boolean elementExists = (Boolean) actions.find("//body", false);
         
@@ -54,6 +61,8 @@ public class RentAdSearchTest extends TestBase {
     
     @Test(description = "Example test with URL building and navigation")
     public void testUrlBuildingAndNavigation() {
+        initializeActions(); // Initialize SeleniumActions
+        
         // Example of building URLs dynamically
         String propertySearchUrl = buildUrl("properties");
         String jobSearchUrl = buildUrl("jobs");

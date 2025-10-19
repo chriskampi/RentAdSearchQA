@@ -154,16 +154,30 @@ public class SeleniumActions {
     }
 
     
+    /**
+     * Count the number of elements matching the given XPath pattern
+     * 
+     * @param xpathPattern The XPath pattern to search for
+     * @return The number of elements found
+     */
     public int countElements(String xpathPattern) {
         return driver.findElements(By.xpath(xpathPattern)).size();
     }
     
+    /**
+     * Find all elements matching the given XPath pattern
+     * 
+     * @param xpathPattern The XPath pattern to search for
+     * @return List of WebElements matching the pattern
+     */
     public List<WebElement> findElements(String xpathPattern) {
         return driver.findElements(By.xpath(xpathPattern));
     }
     
     /**
-     * Scroll to the end of the page step by step to load all content progressively
+     * Scroll to the end of the page step by step to load all content progressively.
+     * This method scrolls down in increments of 1000 pixels, waiting for content to load,
+     * until no new content is loaded. Useful for lazy-loaded pages.
      */
     public void scrollToEndOfPage() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -206,6 +220,11 @@ public class SeleniumActions {
     }
 
 
+    /**
+     * Scroll to the start of the page (leftmost position) step by step.
+     * This method scrolls left in increments of 1000 pixels until reaching the beginning.
+     * Useful for horizontal scrolling scenarios.
+     */
     public void scrollToStartOfPage() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         
@@ -239,6 +258,10 @@ public class SeleniumActions {
         js.executeScript("window.scrollTo(0, document.body.scrollLeft);");
     }
 
+    /**
+     * Send the Escape key to the browser.
+     * Useful for closing dialogs, dropdowns, or canceling operations.
+     */
     public void sendkeyEscape() {
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.ESCAPE).perform();

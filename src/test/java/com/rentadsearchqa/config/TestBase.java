@@ -26,12 +26,20 @@ public class TestBase {
     protected WebDriver driver;
     protected String baseUrl;
     
+    /**
+     * Setup method that runs before the entire test suite.
+     * Configures WebDriverManager and clears driver cache.
+     */
     @BeforeSuite
     public void setupSuite() {
         // Setup WebDriverManager and clear cache
         WebDriverManager.chromedriver().clearDriverCache().setup();
     }
     
+    /**
+     * Setup method that runs before each test method.
+     * Initializes browser, navigates to base URL, handles cookies, and sets up driver context.
+     */
     @BeforeMethod
     public void setupBrowser() {
         setupChromeDriver();
@@ -131,6 +139,10 @@ public class TestBase {
         driver.get(fullUrl);
     }
     
+    /**
+     * Teardown method that runs after each test method.
+     * Closes the browser and clears the driver context.
+     */
     @AfterMethod
     public void teardownBrowser() {
         if (driver != null) {
@@ -144,6 +156,10 @@ public class TestBase {
         DriverContext.getInstance().clearDriver();
     }
     
+    /**
+     * Teardown method that runs after the entire test suite.
+     * Performs additional cleanup if needed.
+     */
     @AfterSuite
     public void teardownSuite() {
         // Additional cleanup if needed

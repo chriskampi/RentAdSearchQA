@@ -18,6 +18,11 @@ public class properties extends SeleniumActions {
     
     private final PropertyPage propertyPage;
     private final PropertyResultsPage propertyResultsPage;
+    /**
+     * Constructor for properties class
+     * 
+     * @param driver The WebDriver instance for browser automation
+     */
     public properties(WebDriver driver) {
         super(driver, 10);
         this.propertyPage = new PropertyPage(driver);
@@ -55,9 +60,20 @@ public class properties extends SeleniumActions {
         propertyPage.clickSearchButton();
     }
 
-    /** 
-     * filter and validate results in properties
-     * @param filters list of dictionaries with keys: title, min and max values
+    /**
+     * Apply filters to property search results and validate that all results meet the filter criteria.
+     * Supports price and size filters with validation of:
+     * - Price range validation (min-max)
+     * - Size range validation (min-max) 
+     * - Image count validation (max 30 per property)
+     * - Price sorting validation (ascending order)
+     * - Multi-page result handling
+     * 
+     * @param filters List of filter maps containing:
+     *                - "title": filter type ("price" or "size")
+     *                - "min": minimum value for the filter
+     *                - "max": maximum value for the filter
+     * @throws AssertionError If any property doesn't meet the filter criteria
      */
     public void filterAndValidateResults(List<Map<String, String>> filters) {
         // Apply all filters first
@@ -149,6 +165,18 @@ public class properties extends SeleniumActions {
         }
     }
 
+    /**
+     * Validates phone information visibility in property listings.
+     * Tests the phone info functionality by:
+     * 1. Verifying phone info is initially hidden
+     * 2. Clicking on property ad price to reveal phone info
+     * 3. Clicking phone info button to show contact details
+     * 4. Verifying phone info is now visible
+     * 5. Closing phone info dialog using escape key
+     * 6. Verifying phone info is hidden again
+     * 
+     * This method tests the complete phone info interaction flow.
+     */
     public void validatePhoneInfoInProperty() {
         propertyResultsPage.findPhoneInfo(false);
         propertyResultsPage.clickPropertyAdPriceSpan();

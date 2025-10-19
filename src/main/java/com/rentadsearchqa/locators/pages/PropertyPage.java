@@ -9,12 +9,21 @@ import org.openqa.selenium.WebDriver;
  */
 public class PropertyPage extends SearchPage {
 
-    // ===== CONSTRUCTOR =====
+    /**
+     * Constructor for PropertyPage
+     * 
+     * @param driver The WebDriver instance for browser automation
+     */
     public PropertyPage(WebDriver driver) {
         super(driver);
     }
 
     // ===== TYPE FUNCTION =====
+    /**
+     * Type text into the area search input field
+     * 
+     * @param text The area name to search for (e.g., "Παγκράτι")
+     */
     public void typeAreaSearchInput(String text) {
         typeSearchInput("area", text);
     }

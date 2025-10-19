@@ -24,7 +24,7 @@ public class properties extends SeleniumActions {
      */
     public void searchRentAdsInArea(String areaName) {
         // Type the area name in search input
-        searchPage.typeSearchInput("location", areaName);
+        searchPage.typeSearchInput("area", areaName);
         
         // Get all dropdown options
         List<WebElement> dropdownOptions = searchPage.findDropdownOptions(areaName);

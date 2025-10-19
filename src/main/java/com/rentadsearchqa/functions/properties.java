@@ -4,7 +4,6 @@ import com.rentadsearchqa.locators.components.SearchPage;
 import com.rentadsearchqa.utils.SeleniumActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.By;
 import java.util.List;
 
 /**

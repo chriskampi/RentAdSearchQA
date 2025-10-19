@@ -1,11 +1,13 @@
 package com.rentadsearchqa.functions;
 
 import com.rentadsearchqa.locators.pages.PropertyPage;
+import com.rentadsearchqa.locators.pages.PropertyResultsPage;
 import com.rentadsearchqa.utils.SeleniumActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Functions for property search operations
@@ -13,10 +15,11 @@ import java.util.List;
 public class properties extends SeleniumActions {
     
     private final PropertyPage propertyPage;
-    
+    private final PropertyResultsPage propertyResultsPage;
     public properties(WebDriver driver) {
         super(driver, 10);
         this.propertyPage = new PropertyPage(driver);
+        this.propertyResultsPage = new PropertyResultsPage(driver);
     }
     
     /**
@@ -49,4 +52,26 @@ public class properties extends SeleniumActions {
         // Click search button
         propertyPage.clickSearchButton();
     }
+
+    /** 
+     * filter and validate results in properties
+     * @param filters list of dictionaries with keys: title, min and max values
+     */
+
+    public void filterAndValidateResults(List<Map<String, String>> filters) {
+        for (Map<String, String> filter : filters) {
+            if (filter.get("title").equals("price")) {
+                propertyResultsPage.clickPriceFilterButton();
+                propertyResultsPage.typeMinimumPrice(filter.get("min"));
+                propertyResultsPage.typeMaximumPrice(filter.get("max"));
+                propertyResultsPage.clickSubmitInputButton();
+            } else if (filter.get("title").equals("size")) {
+                propertyResultsPage.clickSizeFilterButton();
+                propertyResultsPage.typeMinimumSize(filter.get("min"));
+                propertyResultsPage.typeMaximumSize(filter.get("max"));
+                propertyResultsPage.clickSubmitInputButton();
+            }
+        }
+    }
+
 }

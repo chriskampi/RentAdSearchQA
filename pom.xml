@@ -25,6 +25,7 @@
         <allure.version>2.24.0</allure.version>
         <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.2.2</maven.surefire.plugin.version>
+        <aspectj.version>1.9.20</aspectj.version>
     </properties>
 
     <dependencies>
@@ -110,8 +111,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <properties>
-        <aspectj.version>1.9.20</aspectj.version>
-    </properties>
 </project>

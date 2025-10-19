@@ -150,4 +150,14 @@ public class SeleniumActions {
         String[] expectedArray = expectedValues.toArray(new String[0]);
         findAndAssertCount(xpathPattern, expectedArray);
     }
+
+    
+    public int countElements(String xpathPattern) {
+        return driver.findElements(By.xpath(xpathPattern)).size();
+    }
+    
+    public List<WebElement> findElements(String xpathPattern) {
+        return driver.findElements(By.xpath(xpathPattern));
+    }
+    
 }

@@ -4,6 +4,7 @@ import com.rentadsearchqa.utils.SeleniumActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
+import java.util.List;
 
 /**
  * Example component class showing paths as variables and basic functions
@@ -80,4 +81,3 @@ public class SearchPage extends SeleniumActions {
     }
     
 }
-

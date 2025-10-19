@@ -36,6 +36,7 @@ public class properties extends SeleniumActions {
             
             if (count == 0) {
                 searchPage.clickDropdownOption(optionText);
+                searchPage.typeSearchInput("area", areaName);
             }
         }
         

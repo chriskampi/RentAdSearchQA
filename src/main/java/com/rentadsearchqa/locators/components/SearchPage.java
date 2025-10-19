@@ -59,6 +59,10 @@ public class SearchPage extends SeleniumActions {
     public void clickTabButton(String tabType) {
         findAndClick(constructTabButton(tabType));
     }
+
+    public void clickDropdownOption(String text) {
+        findAndClick(constructDropdownOptionButton(text));
+    }
     
     
     // ===== TYPE FUNCTION =====

@@ -3,9 +3,11 @@ package com.rentadsearchqa.utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.Keys;
 import java.time.Duration;
 import java.util.List;
 
@@ -160,4 +162,85 @@ public class SeleniumActions {
         return driver.findElements(By.xpath(xpathPattern));
     }
     
+    /**
+     * Scroll to the end of the page step by step to load all content progressively
+     */
+    public void scrollToEndOfPage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        
+        // Get initial page height
+        Long lastHeight = (Long) js.executeScript("return document.body.scrollHeight");
+        
+        while (true) {
+            // Scroll down by 1000 pixels at a time
+            js.executeScript("window.scrollBy(0, 1000);");
+            
+            // Wait for content to load
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+            
+            // Get new page height after scrolling
+            Long newHeight = (Long) js.executeScript("return document.body.scrollHeight");
+            
+            // If page height hasn't changed, we've reached the end
+            if (newHeight.equals(lastHeight)) {
+                break;
+            }
+            
+            lastHeight = newHeight;
+        }
+        
+        // Final scroll to absolute bottom
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        
+        // Final wait to ensure all content is loaded
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+
+    public void scrollToStartOfPage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        
+        // Get initial page height
+        Long lastLeft = (Long) js.executeScript("return document.body.scrollLeft");
+        
+        while (true) {
+            // Scroll down by 1000 pixels at a time
+            js.executeScript("window.scrollBy(-1000, 0);");
+            
+            // Wait for content to load
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+            
+            // Get new page height after scrolling
+            Long newLeft = (Long) js.executeScript("return document.body.scrollLeft");
+            
+            // If page height hasn't changed, we've reached the end
+            if (newLeft.equals(lastLeft)) {
+                break;
+            }
+            
+            lastLeft = newLeft;
+        }
+        
+        // Final scroll to absolute bottom
+        js.executeScript("window.scrollTo(0, document.body.scrollLeft);");
+    }
+
+    public void sendkeyEscape() {
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Keys.ESCAPE).perform();
+    }
 }

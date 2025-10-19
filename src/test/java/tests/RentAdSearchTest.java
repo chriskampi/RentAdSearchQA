@@ -17,6 +17,7 @@ public class RentAdSearchTest extends TestBase {
         
         // Search for rent ads in Παγκράτι
         propertySearch.searchRentAdsInArea("Παγκράτι");
+        propertySearch.validatePhoneInfoInProperty();
         propertySearch.filterAndValidateResults(Arrays.asList(
             Map.of("title", "price", "min", "200", "max", "700"),
             Map.of("title", "size", "min", "75", "max", "150")

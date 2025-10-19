@@ -1,6 +1,6 @@
 package com.rentadsearchqa.functions;
 
-import com.rentadsearchqa.locators.components.SearchPage;
+import com.rentadsearchqa.locators.pages.PropertyPage;
 import com.rentadsearchqa.utils.SeleniumActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,11 +12,11 @@ import java.util.List;
  */
 public class properties extends SeleniumActions {
     
-    private SearchPage searchPage;
+    private PropertyPage propertyPage;
     
     public properties(WebDriver driver) {
         super(driver, 10);
-        this.searchPage = new SearchPage(driver);
+        this.propertyPage = new PropertyPage(driver);
     }
     
     /**
@@ -25,10 +25,10 @@ public class properties extends SeleniumActions {
      */
     public void searchRentAdsInArea(String areaName) {
         // Type the area name in search input
-        searchPage.typeSearchInput("area", areaName);
+        propertyPage.typeAreaSearchInput(areaName);
         
         // Get all dropdown options and collect their texts
-        List<WebElement> dropdownOptions = searchPage.findDropdownOptions();
+        List<WebElement> dropdownOptions = propertyPage.findDropdownOptions();
         List<String> optionTexts = new ArrayList<>();
         
         // Collect all option texts first (to avoid stale elements)
@@ -38,15 +38,15 @@ public class properties extends SeleniumActions {
         
         // For each option text, check if it's already selected, if not, click it
         for (String optionText : optionTexts) {
-            int count = searchPage.countSelectedResultButtons(optionText);
+            int count = propertyPage.countSelectedResultButtons(optionText);
             
             if (count == 0) {
-                searchPage.clickDropdownOption(optionText);
-                searchPage.typeSearchInput("area", areaName);
+                propertyPage.clickDropdownOption(optionText);
+                propertyPage.typeAreaSearchInput(areaName);
             }
         }
         
         // Click search button
-        searchPage.clickSearchButton();
+        propertyPage.clickSearchButton();
     }
 }

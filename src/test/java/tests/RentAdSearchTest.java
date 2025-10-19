@@ -64,20 +64,16 @@ public class RentAdSearchTest extends TestBase {
         initializeActions(); // Initialize SeleniumActions
         
         // Example of building URLs dynamically
-        String propertySearchUrl = buildUrl("properties");
-        String jobSearchUrl = buildUrl("jobs");
+        String propertySearchUrl = buildUrl("property");
         
         System.out.println("Property search URL: " + propertySearchUrl);
-        System.out.println("Job search URL: " + jobSearchUrl);
         
         // Example: Navigate to a specific section
-        // navigateToPath("properties");  // Would navigate to https://www.xe.gr/properties
+        // navigateToPath("property");  // Would navigate to https://www.xe.gr/property
         // actions.find("//h1[contains(text(), 'Ακίνητα')]", true);
         
         // Example: Navigate to another section
-        // navigateToPath("jobs");  // Would navigate to https://www.xe.gr/jobs
-        // actions.find("//h1[contains(text(), 'Εργασία')]", true);
         
         System.out.println("URL building and navigation test completed");
-    }
+    }   
 }

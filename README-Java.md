@@ -132,9 +132,7 @@ String baseUrl = "https://www.xe.gr/";
 You can build URLs dynamically for different sections:
 ```java
 // Navigate to specific paths
-navigateToPath("properties");  // → https://www.xe.gr/properties
-navigateToPath("jobs");        // → https://www.xe.gr/jobs
-buildUrl("cars");              // → https://www.xe.gr/cars
+navigateToPath("property");  // → https://www.xe.gr/property
 ```
 
 ## Benefits of Java Version

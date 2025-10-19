@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class properties extends SeleniumActions {
     
-    private PropertyPage propertyPage;
+    private final PropertyPage propertyPage;
     
     public properties(WebDriver driver) {
         super(driver, 10);

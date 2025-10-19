@@ -2,6 +2,7 @@ package tests;
 
 import com.rentadsearchqa.config.TestBase;
 import com.rentadsearchqa.functions.properties;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.Map;
@@ -31,18 +32,48 @@ public class RentAdSearchTest extends TestBase {
      * - Area Range: 75m² - 150m²
      */
     @Test
+    @Epic("Rental Property Search")
+    @Feature("Smoke Testing")
+    @Story("Daily Production Validation")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Comprehensive smoke test for xe.gr rental property search functionality. " +
+                "Validates complete user journey from search to result validation with detailed step reporting.")
     public void testSearchRentAdsInPangrati() {
-        // Create properties instance
         properties propertySearch = new properties(driver);
         
-        // Define search parameters
+        // Execute test steps with detailed Allure reporting
+        searchForRentalProperties(propertySearch);
+        validatePhoneInfoFunctionality(propertySearch);
+        applyFiltersAndValidateResults(propertySearch);
+    }
+    
+    /**
+     * Step 1: Search for rental properties in Παγκράτι area
+     * Handles autocomplete selection and executes search
+     */
+    @Step("Search for rental properties in Παγκράτι area")
+    private void searchForRentalProperties(properties propertySearch) {
         String searchArea = "Παγκράτι";
+        propertySearch.searchRentAdsInArea(searchArea);
+    }
+    
+    /**
+     * Step 2: Validate phone information functionality
+     * Tests the complete phone info interaction flow
+     */
+    @Step("Validate phone information functionality")
+    private void validatePhoneInfoFunctionality(properties propertySearch) {
+        propertySearch.validatePhoneInfoInProperty();
+    }
+    
+    /**
+     * Step 3: Apply filters and validate results
+     * Applies price and size filters, then validates all results meet criteria
+     */
+    @Step("Apply price and size filters, then validate all results")
+    private void applyFiltersAndValidateResults(properties propertySearch) {
         Map<String, String> priceFilter = Map.of("title", "price", "min", "200", "max", "700");
         Map<String, String> sizeFilter = Map.of("title", "size", "min", "75", "max", "150");
-        
-        // Search for rent ads in Παγκράτι
-        propertySearch.searchRentAdsInArea(searchArea);
-        propertySearch.validatePhoneInfoInProperty();
         propertySearch.filterAndValidateResults(Arrays.asList(priceFilter, sizeFilter));
     }
 }

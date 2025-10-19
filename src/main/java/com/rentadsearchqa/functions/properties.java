@@ -3,6 +3,7 @@ package com.rentadsearchqa.functions;
 import com.rentadsearchqa.locators.pages.PropertyPage;
 import com.rentadsearchqa.locators.pages.PropertyResultsPage;
 import com.rentadsearchqa.utils.SeleniumActions;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class properties extends SeleniumActions {
      * Search for rent ads in a specific area and handle dropdown options
      * @param areaName The area name to search for (e.g., "Παγκράτι")
      */
+    @Step("Search for rent ads in area: {areaName}")
     public void searchRentAdsInArea(String areaName) {
         // Type the area name in search input
         propertyPage.typeAreaSearchInput(areaName);
@@ -75,6 +77,7 @@ public class properties extends SeleniumActions {
      *                - "max": maximum value for the filter
      * @throws AssertionError If any property doesn't meet the filter criteria
      */
+    @Step("Apply filters and validate all results meet criteria")
     public void filterAndValidateResults(List<Map<String, String>> filters) {
         // Apply all filters first
         for (Map<String, String> filter : filters) {
@@ -177,6 +180,7 @@ public class properties extends SeleniumActions {
      * 
      * This method tests the complete phone info interaction flow.
      */
+    @Step("Validate phone information functionality")
     public void validatePhoneInfoInProperty() {
         propertyResultsPage.findPhoneInfo(false);
         propertyResultsPage.clickPropertyAdPriceSpan();

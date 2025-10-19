@@ -13,10 +13,17 @@ public class ResultsPage extends SeleniumActions {
     private static final String BUTTON_PRICE_FILTER = "//button[@data-testid='price-filter-button']";
     private static final String INPUT_MINIMUM_PRICE = "//input[@data-testid='minimum_price_input']";
     private static final String INPUT_MAXIMUM_PRICE = "//input[@data-testid='maximum_price_input']";
+    private static final String A_PAGE_RESULT = "//a[@aria-current='page']";
+    
 
     // ===== CONSTRUCTOR =====
     public ResultsPage(WebDriver driver) {
         super(driver, 10);
+    }
+
+    // ===== CONSTRUCTORS =====
+    private String divAdResult(String item) {
+        return "//div[contains(@data-testid,'" + item + "-ad')]";
     }
 
     // ===== CLICK FUNCTION =====
@@ -38,4 +45,11 @@ public class ResultsPage extends SeleniumActions {
 
     }
 
+    public void clickPageResult(String page) {
+        findAndClick(A_PAGE_RESULT + "[" + page + "]");
+    }
+
+    public List<WebElement> findPageResults() {
+        returnfindElements(A_PAGE_RESULT);
+    }
 }

@@ -72,6 +72,12 @@ public class properties extends SeleniumActions {
                 propertyResultsPage.clickSubmitInputButton();
             }
         }
-    }
+        List<WebElement> propertyResults = propertyResultsPage.findPropertyResults();
+        return propertyResults;
+
+    //     List<WebElement> pageResults = propertyResultsPage.findPageResults();
+    //     if (pageResults.size() > 1) {
+
+    // }
 
 }

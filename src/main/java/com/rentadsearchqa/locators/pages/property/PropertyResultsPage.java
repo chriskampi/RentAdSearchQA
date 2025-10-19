@@ -38,6 +38,10 @@ public class PropertyResultsPage extends ResultsPage {
     public void typeMaximumSize(String size) {
         findAndType(INPUT_MAXIMUM_SIZE, size);
     }
+
+    public List<WebElement> findPropertyResults() {
+        return findElements(divAdResult("property"));
+    }
 }
 
 

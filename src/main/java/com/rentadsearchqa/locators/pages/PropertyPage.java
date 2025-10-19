@@ -14,7 +14,7 @@ public class PropertyPage extends SearchPage {
         super(driver);
     }
 
-    // ===== TYPE FUNCTION =====s
+    // ===== TYPE FUNCTION =====
     public void typeAreaSearchInput(String text) {
         typeSearchInput("area", text);
     }
